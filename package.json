@@ -16,9 +16,15 @@
   },
   "dependencies": {
     "@nuxtjs/sanity": "^1.8.0",
+    "@pinia/nuxt": "^0.4.11",
+    "@sanity/client": "^6.4.0",
     "@sanity/image-url": "^1.0.2",
     "@studio-freight/lenis": "^1.0.19",
     "animejs": "^3.2.1",
-    "colorthief": "^2.4.0"
+    "colorthief": "^2.4.0",
+    "pinia": "^2.1.6"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

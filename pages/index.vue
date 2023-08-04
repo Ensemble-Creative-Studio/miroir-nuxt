@@ -3,37 +3,6 @@ import anime from 'animejs/lib/anime.es.js'
 import ColorThief from 'colorthief'
 const { $initLenis, $destroyLenis } = useNuxtApp()
 
-// definePageMeta({
-//   pageTransition: {
-//     name: 'custom',
-//     css: false,
-//     onBeforeEnter: (el) => {},
-//     onEnter: (el, done) => {
-//       done()
-//     },
-//     onLeave: (el, done) => {
-//       /* Animate out */
-//       anime({
-//         targets: '.brand__curtain',
-//         translateY: ['101%', '0%'],
-//         duration: 1500,
-//         easing: 'easeOutExpo',
-//       })
-
-//       anime({
-//         targets: '.wrapper',
-//         opacity: [1, 0],
-//         duration: 1500,
-//         easing: 'easeOutExpo',
-//       })
-
-//       setTimeout(() => {
-//         done()
-//       }, 1500)
-//     },
-//   },
-// })
-
 /* Sanity data */
 const query = groq`*[_type == "brandsPage"][0]
 {
@@ -71,6 +40,7 @@ const brandGroups = computed(() => {
   return groupedBrands
 })
 
+const $brand = ref([])
 const $curtain = ref([])
 const $image = ref([])
 
@@ -89,7 +59,43 @@ onMounted(() => {
       $curtain.value[index].style.background = `rgb(${r}, ${g}, ${b})`
     })
   })
+
+  console.log('properly mounted')
 })
+
+// WIP
+const animateIn = () => {
+  anime({
+    targets: '.brand',
+    opacity: {
+      value: 1,
+      duration: 500,
+      easing: 'easeOutExpo',
+      delay: 500,
+    },
+    scale: {
+      value: [0.75, 1],
+      duration: 750,
+      delay: 1500,
+      easing: 'easeOutExpo',
+    },
+    translateY: {
+      value: [100, 0],
+      duration: 1000,
+      easing: 'easeOutExpo',
+      // delay: anime.stagger(300), // Add initial delay?
+      delay: 500,
+    },
+  })
+
+  anime({
+    targets: '.brand__curtain',
+    translateY: ['0%', '101%'],
+    duration: 1500,
+    delay: 1500,
+    easing: 'easeOutExpo',
+  })
+}
 
 // Refactor this as a plugin
 const getPalette = (url) => {
@@ -107,40 +113,6 @@ const getPalette = (url) => {
 onBeforeUnmount(() => {
   $destroyLenis()
 })
-
-/* Animation */
-const animateIn = () => {
-  anime({
-    targets: '.brand',
-    opacity: {
-      value: [0, 1],
-      duration: 500,
-      easing: 'easeOutExpo',
-      delay: 500,
-    },
-    scale: {
-      value: [0.75, 1],
-      duration: 750,
-      delay: 1500,
-      easing: 'easeOutExpo',
-    },
-    translateY: {
-      value: [50, 0],
-      duration: 1000,
-      easing: 'easeOutExpo',
-      // delay: anime.stagger(300), // Add initial delay?
-      delay: 500,
-    },
-  })
-
-  anime({
-    targets: '.brand__curtain',
-    translateY: ['0%', '101%'],
-    duration: 1500,
-    delay: 1500,
-    easing: 'easeOutExpo',
-  })
-}
 </script>
 
 <template>
@@ -158,12 +130,17 @@ const animateIn = () => {
         v-for="brand in brandGroup"
         :key="brand._id"
         class="brand"
+        ref="$brand"
       >
         <div class="brand__curtain" ref="$curtain"></div>
-        <div class="brand__overlay"></div>
+        <div
+          class="brand__overlay"
+          :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
+        ></div>
         <img
           class="brand__image"
           :src="$urlFor(brand?.thumbnailImage?.asset?._ref).url()"
+          v-if="brand?.thumbnailImage"
           ref="$image"
         />
         <h2 class="brand__title">{{ brand?.title }}</h2>
@@ -186,6 +163,7 @@ const animateIn = () => {
     }
 
     .brand {
+      opacity: 0;
       position: relative;
       aspect-ratio: 3 / 4.25;
       overflow: hidden;
@@ -207,6 +185,11 @@ const animateIn = () => {
         background-color: $white;
         opacity: 0;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+
+        &--visible {
+          opacity: 1;
+          background-color: rgb(227, 227, 227);
+        }
       }
 
       &__title {
