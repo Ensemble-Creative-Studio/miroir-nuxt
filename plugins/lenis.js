@@ -12,7 +12,7 @@ export default defineNuxtPlugin(() => {
       requestAnimationFrame(raf)
     }
     requestAnimationFrame(raf)
-    console.log('Lenis initialized')
+    // console.log('Lenis initialized')
   }
 
   const destroyLenis = () => {
@@ -21,7 +21,7 @@ export default defineNuxtPlugin(() => {
       cancelAnimationFrame(raf)
       lenis = null
       raf = null
-      console.log('Lenis destroyed')
+      // console.log('Lenis destroyed')
     }
   }
 
