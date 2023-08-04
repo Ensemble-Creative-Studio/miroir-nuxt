@@ -15,6 +15,10 @@
     "sass": "^1.64.2"
   },
   "dependencies": {
-    "@nuxtjs/sanity": "^1.8.0"
+    "@nuxtjs/sanity": "^1.8.0",
+    "@sanity/image-url": "^1.0.2",
+    "@studio-freight/lenis": "^1.0.19",
+    "animejs": "^3.2.1",
+    "colorthief": "^2.4.0"
   }
 }
