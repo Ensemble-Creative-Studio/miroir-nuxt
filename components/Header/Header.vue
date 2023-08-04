@@ -26,12 +26,16 @@
 
 <style lang="scss">
 .Header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 5.5rem;
   padding: 1.05rem 2.5rem;
-  background-color: $white;
 
   &__logo {
     width: 14rem;
@@ -48,11 +52,11 @@
 
     li:not(:last-child) {
       margin-right: 6.5rem;
+    }
 
-      a.router-link-exact-active {
-        text-decoration: underline;
-        text-underline-offset: 0.4rem;
-      }
+    li a.router-link-exact-active {
+      text-decoration: underline;
+      text-underline-offset: 0.4rem;
     }
   }
 }
