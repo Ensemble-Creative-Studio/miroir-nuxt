@@ -19,11 +19,6 @@ body {
   line-height: 1.618;
   font-family: 'ABCRepro';
   font-weight: 400;
-  // font-feature-settings: 'ss02', 'ss06', 'ss07', 'ss08', 'ss09', 'ss11', 'ss12';
-
-  // @include viewport-480 {
-  //   font-size: $mobile-default-text;
-  // }
 
   #__nuxt,
   #__layout,
@@ -49,7 +44,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(221, 221, 221);
 }
 
 ::-webkit-scrollbar-thumb:hover {

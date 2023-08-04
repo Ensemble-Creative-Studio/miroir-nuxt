@@ -2,12 +2,18 @@
 import anime from 'animejs/lib/anime.es.js'
 const { $initLenis, $destroyLenis } = useNuxtApp()
 
+/* Sanity data */
+const route = useRoute()
+
+const query = groq`*[_type == "brands" && slug.current == "${route.params.slug}"][0]`
+const { data: brand, refresh } = useSanityQuery(query)
+
 onMounted(() => {
   $initLenis()
 
   anime({
-    targets: '.brand-page',
-    opacity: [0, 1],
+    targets: ['.visuals', '.text'],
+    opacity: 1,
     duration: 1000,
     easing: 'easeInOutExpo',
   })
@@ -16,12 +22,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   $destroyLenis()
 })
-
-/* Sanity data */
-const route = useRoute()
-
-const query = groq`*[_type == "brands" && slug.current == "${route.params.slug}"][0]`
-const { data: brand, refresh } = useSanityQuery(query)
 </script>
 
 <template>
@@ -40,13 +40,14 @@ const { data: brand, refresh } = useSanityQuery(query)
         <SanityContent :blocks="brand?.englishDescription" />
       </div>
       <div class="contact">
-        <p>{{ brand?.contact.name }}</p>
-        <a :href="`mailto:${brand?.contact.email}`">
-          {{ brand?.contact.email }}
+        <p>{{ brand?.contact?.name }}</p>
+        <a :href="`mailto:${brand?.contact?.email}`">
+          {{ brand?.contact?.email }}
         </a>
-        <p>{{ brand?.contact.phone }}</p>
+        <p>{{ brand?.contact?.phone }}</p>
       </div>
     </div>
+    <Pagination />
   </main>
 </template>
 
@@ -58,6 +59,7 @@ const { data: brand, refresh } = useSanityQuery(query)
 
   .visuals {
     grid-column: auto / span 9;
+    opacity: 0;
 
     .visual {
       img {
@@ -76,6 +78,7 @@ const { data: brand, refresh } = useSanityQuery(query)
     padding-top: 9rem;
     position: sticky;
     top: 0;
+    opacity: 0;
 
     .fr-description,
     .en-description,

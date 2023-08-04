@@ -2,7 +2,7 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/sanity'],
+  modules: ['@nuxtjs/sanity', '@pinia/nuxt'],
   sanity: {
     projectId: 'psy845lh',
   },
@@ -16,5 +16,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  components: ['~/components/Header'],
+  components: [
+    '~/components/Header',
+    '~/components/Loader',
+    '~/components/Pagination',
+  ],
 })
