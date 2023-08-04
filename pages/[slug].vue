@@ -57,6 +57,11 @@ onBeforeUnmount(() => {
   position: relative;
   @include grid(18, 1fr, 1.5, 0);
 
+  @include mq($until: mobile) {
+    background: red;
+    display: none;
+  }
+
   .visuals {
     grid-column: auto / span 9;
     opacity: 0;
@@ -75,7 +80,7 @@ onBeforeUnmount(() => {
   .text {
     grid-column: 11 / span 7;
     margin-top: 38rem;
-    padding-top: 9rem;
+    padding: 9rem 0;
     position: sticky;
     top: 0;
     opacity: 0;

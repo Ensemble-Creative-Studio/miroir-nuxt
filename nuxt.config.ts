@@ -6,12 +6,17 @@ export default defineNuxtConfig({
   sanity: {
     projectId: 'psy845lh',
   },
-  css: ['@/assets/scss/main/index.scss', '@/assets/fonts/ABCRepro/style.css'],
+  css: ['@/assets/scss/index.scss', '@/assets/fonts/ABCRepro/style.css'],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "@/assets/scss/resources/index.scss" as *;',
+          additionalData: `
+            @import '@/assets/scss/resources/mq';\n
+            @import '@/assets/scss/resources/variables';\n
+            @import '@/assets/scss/resources/mixins';\n
+            @import '@/assets/scss/resources/utils';\n
+          `,
         },
       },
     },
