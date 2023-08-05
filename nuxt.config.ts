@@ -15,7 +15,6 @@ export default defineNuxtConfig({
             @import '@/assets/scss/tools/mq';\n
             @import '@/assets/scss/tools/variables';\n
             @import '@/assets/scss/tools/mixins';\n
-            @import '@/assets/scss/tools/utils';\n
           `,
         },
       },
@@ -25,6 +24,7 @@ export default defineNuxtConfig({
     '~/components/Header',
     '~/components/Loader',
     '~/components/Pagination',
+    '~/components/Annex',
     '~/components/Footer',
   ],
 })
