@@ -55,5 +55,16 @@ const nextBrand = computed(() => {
   justify-content: space-between;
   width: 100%;
   text-transform: uppercase;
+  pointer-events: none;
+
+  @include mq($until: tablet) {
+    background-color: $white;
+    padding: 0.8rem 1.6rem;
+    bottom: 0;
+  }
+
+  a {
+    pointer-events: auto;
+  }
 }
 </style>

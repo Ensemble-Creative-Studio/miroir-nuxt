@@ -17,9 +17,15 @@
       </NuxtLink>
     </div>
     <ul class="Header__menu">
-      <li><NuxtLink to="/">Brands</NuxtLink></li>
-      <li><NuxtLink to="/agency">Agency</NuxtLink></li>
-      <li><NuxtLink to="/contact">Contact</NuxtLink></li>
+      <li>
+        <NuxtLink to="/">Brands</NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/agency">Agency </NuxtLink>
+      </li>
+      <li>
+        <NuxtLink to="/contact">Contact</NuxtLink>
+      </li>
     </ul>
   </header>
 </template>
@@ -37,12 +43,21 @@
   height: 5.5rem;
   padding: 1.05rem 2.5rem;
 
+  @include mq($until: tablet) {
+    padding: 1rem;
+  }
+
   &__logo {
     width: 14rem;
+
+    @include mq($until: tablet) {
+      width: 8rem;
+    }
 
     svg {
       height: 100%;
       width: 100%;
+      display: block;
     }
   }
 
@@ -52,6 +67,10 @@
 
     li:not(:last-child) {
       margin-right: 6.5rem;
+
+      @include mq($until: tablet) {
+        margin-right: 1rem;
+      }
     }
 
     li a.router-link-exact-active {
