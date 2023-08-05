@@ -1,7 +1,8 @@
-@import 'resources/fonts';
-@import 'resources/mq';
-@import 'resources/variables';
-@import 'resources/mixins';
-@import 'resources/reset';
-@import 'resources/base';
-@import 'resources/utils';
+@import 'tools/mq';
+@import 'tools/variables';
+@import 'tools/mixins';
+@import 'tools/utils';
+
+@import 'main/fonts';
+@import 'main/reset';
+@import 'main/base';
