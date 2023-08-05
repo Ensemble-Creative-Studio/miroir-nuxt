@@ -27,9 +27,5 @@ export const useBrandsStore = defineStore('brands', () => {
     }
   }
 
-  async function clearBrands() {
-    brands.value = []
-  }
-
-  return { brands, setBrands, clearBrands }
+  return { brands, setBrands }
 })
