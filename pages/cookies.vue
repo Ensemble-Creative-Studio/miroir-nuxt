@@ -13,6 +13,7 @@ useHead({
   <div class="cookies-page">
     <Annex :data="cookies" />
   </div>
+  <Footer />
 </template>
 
 <style lang="scss">

@@ -13,6 +13,7 @@ useHead({
   <div class="legal-page">
     <Annex :data="legal" />
   </div>
+  <Footer />
 </template>
 
 <style lang="scss">

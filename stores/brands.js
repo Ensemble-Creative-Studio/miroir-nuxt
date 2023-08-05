@@ -5,6 +5,7 @@ export const client = createClient({
   projectId: 'psy845lh',
   dataset: 'production',
   useCdn: true, // set to `false` to bypass the edge cache
+  apiVersion: '2023-08-05',
 })
 
 export const useBrandsStore = defineStore('brands', () => {
