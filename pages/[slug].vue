@@ -1,13 +1,14 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
 
-/* Sanity data */
 const route = useRoute()
 
+/* Sanity data */
 const query = groq`*[_type == "brands" && slug.current == "${route.params.slug}"][0]`
 const { data: brand, refresh } = useSanityQuery(query)
 
 onMounted(() => {
+  /* Animate in */
   anime({
     targets: ['.visuals', '.text'],
     opacity: 1,
@@ -15,6 +16,8 @@ onMounted(() => {
     easing: 'easeInOutExpo',
   })
 })
+
+/* SEO */
 </script>
 
 <template>

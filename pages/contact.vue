@@ -2,6 +2,7 @@
 import anime from 'animejs/lib/anime.es.js'
 
 onMounted(() => {
+  /* Animate in */
   anime({
     targets: '.contact-page .wrapper',
     opacity: [0, 1],

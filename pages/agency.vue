@@ -2,6 +2,7 @@
 import anime from 'animejs/lib/anime.es.js'
 
 onMounted(() => {
+  /* Animate in */
   anime({
     targets: '.agency-page .wrapper',
     opacity: [0, 1],
@@ -13,11 +14,17 @@ onMounted(() => {
 /* Sanity data */
 const query = groq`*[_type == "agency"][0]`
 const { data: agency, refresh } = useSanityQuery(query)
+
+/* SEO */
+useHead({
+  title: 'Miroir | Agency',
+})
 </script>
 
 <template>
   <main class="agency-page">
     <div class="wrapper">
+      <h1 class="title title--mobile mr-big-title">{{ agency?.title }}</h1>
       <div class="visual">
         <SanityImage
           v-if="agency?.image?.asset?._ref"
@@ -35,6 +42,7 @@ const { data: agency, refresh } = useSanityQuery(query)
       </div>
     </div>
   </main>
+  <Footer />
 </template>
 
 <style scoped lang="scss">
@@ -97,15 +105,25 @@ const { data: agency, refresh } = useSanityQuery(query)
       }
 
       .title {
+        margin-bottom: 3rem;
+
         @include mq($until: tablet) {
-          text-align: center;
-          width: 100%;
+          display: none;
         }
       }
     }
 
-    .description {
-      margin-top: 3rem;
+    .title {
+      &--mobile {
+        display: none;
+        grid-column: 1 / span 12;
+        text-align: center;
+        margin-bottom: 3rem;
+
+        @include mq($until: tablet) {
+          display: block;
+        }
+      }
     }
   }
 }

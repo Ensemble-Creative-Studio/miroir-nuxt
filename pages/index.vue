@@ -89,7 +89,6 @@ const animateIn = () => {
   })
 }
 
-// Refactor this as a plugin
 const getPalette = (url) => {
   return new Promise((resolve) => {
     const img = new Image()
@@ -101,6 +100,11 @@ const getPalette = (url) => {
     img.src = url
   })
 }
+
+/* SEO */
+useHead({
+  title: 'Miroir | Brands',
+})
 </script>
 
 <template>
@@ -134,6 +138,7 @@ const getPalette = (url) => {
       </NuxtLink>
     </div>
   </main>
+  <Footer />
 </template>
 
 <style scoped lang="scss">
@@ -256,14 +261,5 @@ const getPalette = (url) => {
       }
     }
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
-}
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 </style>
