@@ -1,4 +1,5 @@
 <script setup>
+import client from '@/services/sanity.js'
 import anime from 'animejs/lib/anime.es.js'
 
 onMounted(() => {
@@ -12,8 +13,7 @@ onMounted(() => {
 })
 
 /* Sanity data */
-const query = groq`*[_type == "agency"][0]`
-const { data: agency, refresh } = useSanityQuery(query)
+const agency = await client.fetch('*[_type == "agency"][0]')
 
 /* SEO */
 useHead({
