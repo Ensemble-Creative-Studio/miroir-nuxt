@@ -1,3 +1,18 @@
+<script setup>
+import anime from 'animejs/lib/anime.es.js'
+
+onMounted(() => {
+  /* Animate in */
+  anime({
+    targets: ['.Footer'],
+    opacity: 1,
+    duration: 1000,
+    easing: 'easeInOutExpo',
+    delay: 1000,
+  })
+})
+</script>
+
 <template>
   <footer class="Footer">
     <ul>
@@ -17,6 +32,7 @@
   padding-bottom: 1.5rem;
   text-transform: uppercase;
   font-size: 1.4rem;
+  opacity: 0;
 
   ul {
     display: flex;
