@@ -1,20 +1,13 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
-const { $initLenis, $destroyLenis } = useNuxtApp()
 
 onMounted(() => {
-  $initLenis()
-
   anime({
     targets: '.contact-page .wrapper',
     opacity: [0, 1],
     duration: 1000,
     easing: 'easeInOutExpo',
   })
-})
-
-onBeforeUnmount(() => {
-  $destroyLenis()
 })
 
 /* Sanity data */
@@ -57,10 +50,19 @@ const contact = computed(() => {
     @include grid(18, 1fr, 1.5, 0);
     height: calc(100vh - 5.5rem);
 
+    @include mq($until: tablet) {
+      @include grid(12, 1fr, 0.6, 0);
+    }
+
     .text {
-      grid-column: 1 / span 7;
+      grid-column: 1 / span 8;
       align-self: flex-end;
       padding: 0 0 2.5rem 2.5rem;
+
+      @include mq($until: wide) {
+        grid-column: 1 / span 12;
+        order: 2;
+      }
 
       &__address {
         margin-top: 1.5rem;
@@ -73,7 +75,15 @@ const contact = computed(() => {
 
     .visual {
       margin-top: 10rem;
-      grid-column: 9 / span 10;
+      grid-column: 10 / span 9;
+
+      @include mq($until: wide) {
+        order: 1;
+      }
+
+      @include mq($until: tablet) {
+        grid-column: 3 / span 11;
+      }
 
       img {
         aspect-ratio: 7.9 / 5.5;

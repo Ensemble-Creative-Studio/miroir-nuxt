@@ -1,36 +1,13 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
-const { $initLenis, $destroyLenis } = useNuxtApp()
-
-// definePageMeta({
-//   pageTransition: {
-//     name: 'custom',
-//     css: false,
-//     onBeforeEnter: (el) => {},
-//     onEnter: (el, done) => {
-//       done()
-//     },
-//     onLeave: (el, done) => {
-//       setTimeout(() => {
-//         done()
-//       }, 1500)
-//     },
-//   },
-// })
 
 onMounted(() => {
-  $initLenis()
-
   anime({
     targets: '.agency-page .wrapper',
     opacity: [0, 1],
     duration: 1000,
     easing: 'easeInOutExpo',
   })
-})
-
-onBeforeUnmount(() => {
-  $destroyLenis()
 })
 
 /* Sanity data */
@@ -66,10 +43,19 @@ const { data: agency, refresh } = useSanityQuery(query)
     @include grid(18, 1fr, 1.5, 0);
     margin-top: 20rem;
     align-items: center;
-    padding-bottom: 14rem;
+    padding-bottom: 10rem;
+
+    @include mq($until: tablet) {
+      @include grid(12, 1fr, 0.6, 0);
+      margin-top: 12.5rem;
+    }
 
     .visual {
       grid-column: 1 / span 9;
+
+      @include mq($until: tablet) {
+        grid-column: 1 / span 11;
+      }
 
       img {
         aspect-ratio: 7.1 / 5.8;
@@ -78,9 +64,21 @@ const { data: agency, refresh } = useSanityQuery(query)
       ul {
         display: flex;
         flex-wrap: wrap;
-        padding: 1.5rem 0 0 2.5rem;
-        max-width: 33.33%;
+        padding: 1.5rem 2.5rem;
+        max-width: 50%;
         line-height: 1.2;
+
+        @include mq($until: wide) {
+          max-width: 100%;
+        }
+
+        @include mq($until: tablet) {
+          max-width: 50%;
+        }
+
+        @include mq($until: medium) {
+          max-width: 100%;
+        }
 
         li:not(:last-child) {
           &::after {
@@ -92,6 +90,18 @@ const { data: agency, refresh } = useSanityQuery(query)
 
     .text {
       grid-column: 11 / span 7;
+
+      @include mq($until: tablet) {
+        grid-column: 2 / span 10;
+        margin-top: 3rem;
+      }
+
+      .title {
+        @include mq($until: tablet) {
+          text-align: center;
+          width: 100%;
+        }
+      }
     }
 
     .description {
