@@ -12,10 +12,10 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData: `
-            @import '@/assets/scss/resources/mq';\n
-            @import '@/assets/scss/resources/variables';\n
-            @import '@/assets/scss/resources/mixins';\n
-            @import '@/assets/scss/resources/utils';\n
+            @import '@/assets/scss/tools/mq';\n
+            @import '@/assets/scss/tools/variables';\n
+            @import '@/assets/scss/tools/mixins';\n
+            @import '@/assets/scss/tools/utils';\n
           `,
         },
       },
@@ -25,5 +25,6 @@ export default defineNuxtConfig({
     '~/components/Header',
     '~/components/Loader',
     '~/components/Pagination',
+    '~/components/Footer',
   ],
 })
