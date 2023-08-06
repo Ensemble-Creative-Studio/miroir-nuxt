@@ -16,22 +16,27 @@ onMounted(() => {
     easing: 'easeInOutExpo',
   })
 })
-
-/* SEO */
 </script>
 
 <template>
+  <Title>Miroir | {{ brand?.title }}</Title>
   <main class="brand-page">
     <h1 class="title title--mobile mr-big-title">{{ brand?.title }}</h1>
     <div class="visual visual--mobile" v-if="brand?.thumbnailImage">
-      <SanityImage :asset-id="brand?.thumbnailImage?.asset?._ref" />
+      <SanityImage
+        :asset-id="brand?.thumbnailImage?.asset?._ref"
+        alt="Brand Thumbnail"
+      />
     </div>
     <div class="visuals">
       <div class="visual visual--thumbnail" v-if="brand?.thumbnailImage">
-        <SanityImage :asset-id="brand?.thumbnailImage?.asset?._ref" />
+        <SanityImage
+          :asset-id="brand?.thumbnailImage?.asset?._ref"
+          alt="Brand Thumbnail"
+        />
       </div>
       <div class="visual" v-for="image in brand?.images">
-        <SanityImage :asset-id="image.asset._ref" />
+        <SanityImage :asset-id="image.asset._ref" alt="Brand Visual" />
       </div>
     </div>
     <div class="text">

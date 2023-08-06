@@ -34,6 +34,7 @@ const nextBrand = computed(() => {
         name: 'slug',
         params: { slug: previousBrand?.slug?.current },
       }"
+      title="Previous Brand"
       >Previous</NuxtLink
     >
     <NuxtLink
@@ -41,6 +42,7 @@ const nextBrand = computed(() => {
         name: 'slug',
         params: { slug: nextBrand?.slug?.current },
       }"
+      title="Next Brand"
       >Next</NuxtLink
     >
   </div>

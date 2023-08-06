@@ -14,14 +14,10 @@ onMounted(() => {
 /* Sanity data */
 const query = groq`*[_type == "agency"][0]`
 const { data: agency, refresh } = useSanityQuery(query)
-
-/* SEO */
-useHead({
-  title: 'Miroir | Agency',
-})
 </script>
 
 <template>
+  <Title>Miroir | Agency</Title>
   <main class="agency-page">
     <div class="wrapper">
       <h1 class="title title--mobile mr-big-title">{{ agency?.title }}</h1>
@@ -29,6 +25,7 @@ useHead({
         <SanityImage
           v-if="agency?.image?.asset?._ref"
           :asset-id="agency?.image?.asset?._ref"
+          alt="Agency Image"
         />
         <ul>
           <li v-for="item in agency?.names" :key="item._key">

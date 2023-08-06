@@ -1,7 +1,22 @@
+<script setup>
+import anime from 'animejs/lib/anime.es.js'
+
+onMounted(() => {
+  /* Animate in */
+  anime({
+    targets: ['.Header'],
+    opacity: 1,
+    duration: 1000,
+    easing: 'easeInOutExpo',
+    delay: 1000,
+  })
+})
+</script>
+
 <template>
   <header class="Header">
     <div class="Header__logo">
-      <NuxtLink to="/">
+      <NuxtLink to="/" title="Brands">
         <svg
           width="139"
           height="23"
@@ -18,13 +33,13 @@
     </div>
     <ul class="Header__menu">
       <li>
-        <NuxtLink to="/">Brands</NuxtLink>
+        <NuxtLink to="/" title="Brands">Brands</NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/agency">Agency </NuxtLink>
+        <NuxtLink to="/agency" title="Agency">Agency </NuxtLink>
       </li>
       <li>
-        <NuxtLink to="/contact">Contact</NuxtLink>
+        <NuxtLink to="/contact" title="Contact">Contact</NuxtLink>
       </li>
     </ul>
   </header>
@@ -42,6 +57,7 @@
   align-items: center;
   height: 5.5rem;
   padding: 1.05rem 2.5rem;
+  opacity: 0;
 
   @include mq($until: tablet) {
     padding: 1rem;

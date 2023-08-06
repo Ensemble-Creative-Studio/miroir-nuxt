@@ -21,6 +21,7 @@ const contact = computed(() => {
 </script>
 
 <template>
+  <Title>Miroir | Contact</Title>
   <main class="contact-page">
     <div class="wrapper">
       <div class="text">
@@ -30,15 +31,20 @@ const contact = computed(() => {
           <p>{{ contact?.address.city }}</p>
         </div>
         <div class="text__details">
-          <p>{{ contact?.details.email }}</p>
+          <a :href="`mailto:${contact?.details.email}`">{{
+            contact?.details.email
+          }}</a>
           <p>{{ contact?.details.phone }}</p>
-          <p>{{ contact?.details.socialMedia }}</p>
+          <a :href="contact?.details.socialMedia.url" target="_blank">{{
+            contact?.details.socialMedia.name
+          }}</a>
         </div>
       </div>
       <div class="visual">
         <SanityImage
           v-if="contact?.image?.asset?._ref"
           :asset-id="contact?.image?.asset?._ref"
+          alt="Contact Image"
         />
       </div>
     </div>

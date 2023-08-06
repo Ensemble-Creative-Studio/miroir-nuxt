@@ -100,14 +100,10 @@ const getPalette = (url) => {
     img.src = url
   })
 }
-
-/* SEO */
-useHead({
-  title: 'Miroir | Brands',
-})
 </script>
 
 <template>
+  <Title>Miroir | Brands</Title>
   <Transition name="fade" mode="in-out">
     <Loader v-if="isLoading" />
   </Transition>
@@ -122,6 +118,7 @@ useHead({
         :key="brand._id"
         class="brand"
         ref="$brand"
+        title="Brand"
       >
         <div class="brand__curtain" ref="$curtain"></div>
         <div
@@ -133,6 +130,7 @@ useHead({
           :src="$urlFor(brand?.thumbnailImage?.asset?._ref).url()"
           v-if="brand?.thumbnailImage"
           ref="$image"
+          alt="Brand Thumbnail"
         />
         <h2 class="brand__title">{{ brand?.title }}</h2>
       </NuxtLink>
