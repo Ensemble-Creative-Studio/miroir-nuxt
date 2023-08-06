@@ -26,6 +26,7 @@ const { data: agency, refresh } = useSanityQuery(query)
           v-if="agency?.image?.asset?._ref"
           :asset-id="agency?.image?.asset?._ref"
           alt="Agency Image"
+          auto=format
         />
         <ul>
           <li v-for="item in agency?.names" :key="item._key">

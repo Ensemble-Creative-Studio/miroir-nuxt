@@ -26,6 +26,7 @@ onMounted(() => {
       <SanityImage
         :asset-id="brand?.thumbnailImage?.asset?._ref"
         alt="Brand Thumbnail"
+        auto="format"
       />
     </div>
     <div class="visuals">
@@ -33,10 +34,15 @@ onMounted(() => {
         <SanityImage
           :asset-id="brand?.thumbnailImage?.asset?._ref"
           alt="Brand Thumbnail"
+          auto="format"
         />
       </div>
       <div class="visual" v-for="image in brand?.images">
-        <SanityImage :asset-id="image.asset._ref" alt="Brand Visual" />
+        <SanityImage
+          :asset-id="image.asset._ref"
+          alt="Brand Visual"
+          auto="format"
+        />
       </div>
     </div>
     <div class="text">

@@ -45,6 +45,7 @@ const contact = computed(() => {
           v-if="contact?.image?.asset?._ref"
           :asset-id="contact?.image?.asset?._ref"
           alt="Contact Image"
+          auto=format
         />
       </div>
     </div>

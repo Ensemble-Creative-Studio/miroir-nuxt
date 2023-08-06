@@ -19,7 +19,7 @@ const query = groq`*[_type == "brandsPage"][0]
 `
 const { data, refresh } = useSanityQuery(query)
 const brands = computed(() => {
-  return data?.value?.selectedBrands
+  return data?.value
 })
 
 const $brand = ref([])
@@ -30,7 +30,7 @@ onMounted(() => {
   setTimeout(() => {
     /* Get color palettes */
     $image.value.forEach((image, index) => {
-      const src = image.src
+      const src = image.$el.src
 
       getPalette(src).then((palette) => {
         const [dark, light] = palette
@@ -105,16 +105,16 @@ const getPalette = (url) => {
 <template>
   <Title>Miroir | Brands</Title>
   <Transition name="fade" mode="in-out">
-    <Loader v-if="isLoading" />
+    <Loader v-if="isLoading" :images="brands?.loaderImages" />
   </Transition>
   <main class="brands">
     <div class="wrapper">
       <NuxtLink
+        v-for="brand in brands?.selectedBrands"
         :to="{
           name: 'slug',
           params: { slug: brand?.slug?.current },
         }"
-        v-for="brand in brands"
         :key="brand._id"
         class="brand"
         ref="$brand"
@@ -125,13 +125,14 @@ const getPalette = (url) => {
           class="brand__overlay"
           :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
         ></div>
-        <img
-          class="brand__image"
-          :src="$urlFor(brand?.thumbnailImage?.asset?._ref).url()"
+        <SanityImage
+          :asset-id="brand?.thumbnailImage?.asset?._ref"
           v-if="brand?.thumbnailImage"
           ref="$image"
           alt="Brand Thumbnail"
-        />
+          auto="format"
+        >
+        </SanityImage>
         <h2 class="brand__title">{{ brand?.title }}</h2>
       </NuxtLink>
     </div>
