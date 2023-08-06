@@ -86,10 +86,6 @@ onMounted(() => {
     }
 
     .visual {
-      img {
-        object-fit: cover;
-      }
-
       &:not(:first-child) {
         margin-top: 1.5rem;
       }

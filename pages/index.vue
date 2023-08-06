@@ -221,10 +221,6 @@ const getPalette = (url) => {
       &__image {
         height: 100%;
         z-index: 10;
-
-        img {
-          object-fit: cover;
-        }
       }
 
       @include mq($from: tablet) {
