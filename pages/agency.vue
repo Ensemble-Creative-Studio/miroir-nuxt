@@ -22,13 +22,15 @@ const { data: agency, refresh } = useSanityQuery(query)
     <div class="wrapper">
       <h1 class="title title--mobile mr-big-title">{{ agency?.title }}</h1>
       <div class="visual">
-        <SanityImage
-          v-if="agency?.image?.asset?._ref"
-          :asset-id="agency?.image?.asset?._ref"
-          alt="Agency Image"
-          auto=format
-        />
-        <ul>
+        <div class="visual__image">
+          <SanityImage
+            v-if="agency?.image?.asset?._ref"
+            :asset-id="agency?.image?.asset?._ref"
+            alt="Agency Image"
+            auto="format"
+          />
+        </div>
+        <ul class="visual__credits">
           <li v-for="item in agency?.names" :key="item._key">
             {{ item }}
           </li>

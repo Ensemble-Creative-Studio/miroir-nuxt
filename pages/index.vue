@@ -125,14 +125,16 @@ const getPalette = (url) => {
           class="brand__overlay"
           :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
         ></div>
-        <SanityImage
-          :asset-id="brand?.thumbnailImage?.asset?._ref"
-          v-if="brand?.thumbnailImage"
-          ref="$image"
-          alt="Brand Thumbnail"
-          auto="format"
-        >
-        </SanityImage>
+        <div class="brand__image">
+          <SanityImage
+            :asset-id="brand?.thumbnailImage?.asset?._ref"
+            v-if="brand?.thumbnailImage"
+            ref="$image"
+            alt="Brand Thumbnail"
+            auto="format"
+          >
+          </SanityImage>
+        </div>
         <h2 class="brand__title">{{ brand?.title }}</h2>
       </NuxtLink>
     </div>

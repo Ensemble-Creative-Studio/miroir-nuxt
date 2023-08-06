@@ -104,6 +104,10 @@ onMounted(() => {
     top: 0;
     opacity: 0;
 
+    // max-height: 80vh;
+    // overflow: auto;
+    // border: 0.1rem solid red;
+
     @include mq($until: tablet) {
       grid-column: 2 / span 10;
       margin-top: 4rem;
