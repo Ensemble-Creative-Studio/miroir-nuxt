@@ -1,5 +1,12 @@
 <script setup>
 import { useLoaderStore } from '@/stores/loader'
+
+const props = defineProps({
+  images: {
+    type: Array,
+  },
+})
+
 const store = useLoaderStore()
 
 const currentIndex = ref(0)
@@ -14,7 +21,7 @@ const goForward = () => {
 }
 
 watch(currentIndex, (value) => {
-  if (value === 5) {
+  if (value === props.images.length) {
     clearInterval(interval)
 
     setTimeout(() => {
@@ -30,10 +37,13 @@ watch(currentIndex, (value) => {
       class="image"
       :class="index > currentIndex ? 'image--hidden' : ''"
       ref="$image"
-      :style="{ zIndex: index }"
-      v-for="(n, index) in 6"
+      v-for="(n, index) in images"
     >
-      <img :src="'img/' + index + '.jpg'" />
+      <SanityImage
+        :asset-id="images?.[index]?.asset?._ref"
+        alt="Loader Visual"
+        auto="format"
+      />
     </div>
   </div>
 </template>
@@ -59,6 +69,7 @@ watch(currentIndex, (value) => {
 
     &--hidden {
       opacity: 0;
+      visibility: hidden;
     }
 
     img {
