@@ -17,7 +17,7 @@ onMounted(() => {
   <footer class="Footer">
     <ul>
       <li>
-        <NuxtLink to="/legal" name="Legal" title="Legal">Legal</NuxtLink>
+        <NuxtLink to="/mentions-legales" name="Legal" title="Legal">Mentions légales</NuxtLink>
       </li>
       <li>
         <NuxtLink to="/cookies" title="Cookies">Cookies</NuxtLink>

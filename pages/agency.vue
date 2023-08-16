@@ -72,25 +72,26 @@ const { data: agency, refresh } = useSanityQuery(query)
       ul {
         display: flex;
         flex-wrap: wrap;
-        padding: 1.5rem 2.5rem;
-        max-width: 50%;
+        margin: 1.5rem 2.5rem;
+        max-width: 25rem;
+        width: 100%;
         line-height: 1.2;
 
-        @include mq($until: wide) {
-          max-width: 100%;
-        }
+        // @include mq($until: wide) {
+        //   max-width: 100%;
+        // }
 
-        @include mq($until: tablet) {
-          max-width: 50%;
-        }
+        // @include mq($until: tablet) {
+        //   max-width: 50%;
+        // }
 
         @include mq($until: medium) {
-          max-width: 100%;
+          max-width: 20rem;
         }
 
         li:not(:last-child) {
           &::after {
-            content: ',\00a0';
+            content: '\00a0';
           }
         }
       }

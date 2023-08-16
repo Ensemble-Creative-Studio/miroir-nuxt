@@ -1,6 +1,5 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
-import ColorThief from 'colorthief'
 
 import { useLoaderStore } from '@/stores/loader'
 import { storeToRefs } from 'pinia'
@@ -23,23 +22,10 @@ const brands = computed(() => {
 })
 
 const $brand = ref([])
-const $curtain = ref([])
 const $image = ref([])
 
 onMounted(() => {
   setTimeout(() => {
-    /* Get color palettes */
-    $image.value.forEach((image, index) => {
-      const src = image.$el.src
-
-      getPalette(src).then((palette) => {
-        const [dark, light] = palette
-        const [r, g, b] = light
-
-        $curtain.value[index].style.background = `rgb(${r}, ${g}, ${b})`
-      })
-    })
-
     /* Animate in */
     if (!isLoading.value) {
       animateIn()
@@ -49,8 +35,6 @@ onMounted(() => {
 
 watch(isLoading, (value) => {
   if (!value) {
-    console.log('Loader just ended')
-
     setTimeout(() => {
       animateIn()
     }, 500)
@@ -62,42 +46,14 @@ const animateIn = () => {
     targets: '.brand',
     opacity: {
       value: 1,
-      duration: 500,
-      delay: 500,
-      easing: 'spring(1, 100, 50, 8)',
-    },
-    scale: {
-      value: [0.75, 1],
-      duration: 750,
-      delay: 1500,
+      delay: anime.stagger(100, { start: 500 }),
       easing: 'spring(1, 100, 50, 8)',
     },
     translateY: {
-      value: [100, 0],
-      duration: 1000,
+      value: [30, 0],
       delay: 500,
       easing: 'spring(1, 80, 20, 4)',
     },
-  })
-
-  anime({
-    targets: '.brand__curtain',
-    translateY: '101%',
-    duration: 1500,
-    delay: 1600,
-    easing: 'spring(1, 20, 100, 4)',
-  })
-}
-
-const getPalette = (url) => {
-  return new Promise((resolve) => {
-    const img = new Image()
-    img.crossOrigin = 'Anonymous'
-    img.onload = () => {
-      let colorThief = new ColorThief()
-      resolve(colorThief.getPalette(img))
-    }
-    img.src = url
   })
 }
 </script>
@@ -105,7 +61,7 @@ const getPalette = (url) => {
 <template>
   <Title>Miroir | Brands</Title>
   <Transition name="fade" mode="in-out">
-    <Loader v-if="isLoading" :images="brands?.loaderImages" />
+    <Loader v-if="isLoading" :images="brands?.desktopLoaderImages" />
   </Transition>
   <main class="brands">
     <div class="wrapper">
@@ -120,12 +76,11 @@ const getPalette = (url) => {
         ref="$brand"
         title="Brand"
       >
-        <div class="brand__curtain" ref="$curtain"></div>
-        <div
-          class="brand__overlay"
-          :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
-        ></div>
         <div class="brand__image">
+          <div
+            class="brand__overlay"
+            :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
+          ></div>
           <SanityImage
             :asset-id="brand?.thumbnailImage?.asset?._ref"
             v-if="brand?.thumbnailImage"
@@ -157,25 +112,10 @@ const getPalette = (url) => {
     .brand {
       opacity: 0;
       position: relative;
-      aspect-ratio: 3 / 4.25;
       overflow: hidden;
 
       @include mq($until: tablet) {
         overflow: visible;
-      }
-
-      &__curtain {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 20;
-        height: 100%;
-        width: 100%;
-        transform: translateY(0%);
-
-        @include mq($until: tablet) {
-          display: none;
-        }
       }
 
       &__overlay {
@@ -204,23 +144,36 @@ const getPalette = (url) => {
         text-align: center;
         opacity: 0;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        text-overflow: clip;
+
+        @include mq($until: wide) {
+          font-size: 1.8rem;
+        }
 
         @include mq($until: tablet) {
           opacity: 1;
           position: relative;
-          bottom: 0;
           transform: none;
           left: 0;
-          font-size: 1.6rem;
+          bottom: 0;
+          font-size: 1.8rem;
           text-align: center;
           width: 100%;
           padding: 0.6rem;
         }
+
+        @include mq($until: medium) {
+          font-size: 1.4rem;
+        }
+
+        @include mq($until: mobile) {
+          font-size: 1.2rem;
+        }
       }
 
       &__image {
-        height: 100%;
         z-index: 10;
+        aspect-ratio: 3 / 4.25;
       }
 
       @include mq($from: tablet) {

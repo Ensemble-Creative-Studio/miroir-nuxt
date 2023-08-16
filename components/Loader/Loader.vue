@@ -2,15 +2,13 @@
 import { useLoaderStore } from '@/stores/loader'
 
 const props = defineProps({
-  images: {
-    type: Array,
-  },
+  images: Array,
 })
 
 const store = useLoaderStore()
 
 const currentIndex = ref(0)
-const SPEED = 1000
+const SPEED = 750
 
 let interval = setInterval(() => {
   currentIndex.value++
@@ -37,7 +35,7 @@ watch(currentIndex, (value) => {
       class="image"
       :class="index > currentIndex ? 'image--hidden' : ''"
       ref="$image"
-      v-for="(n, index) in images"
+      v-for="(n, index) in props.images"
     >
       <SanityImage
         :asset-id="images?.[index]?.asset?._ref"
@@ -45,6 +43,7 @@ watch(currentIndex, (value) => {
         auto="format"
       />
     </div>
+    <button class="skip-button" @click="store.endLoader()">Skip Intro</button>
   </div>
 </template>
 
@@ -75,6 +74,15 @@ watch(currentIndex, (value) => {
     img {
       object-position: center;
     }
+  }
+
+  .skip-button {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-transform: uppercase;
+    cursor: pointer;
   }
 }
 
