@@ -19,7 +19,7 @@ const goForward = () => {
 }
 
 watch(currentIndex, (value) => {
-  if (value === props.images.length) {
+  if (value === props?.images?.length) {
     clearInterval(interval)
 
     setTimeout(() => {
@@ -38,7 +38,7 @@ watch(currentIndex, (value) => {
       v-for="(n, index) in props.images"
     >
       <SanityImage
-        :asset-id="images?.[index]?.asset?._ref"
+        :asset-id="images[index].asset._ref"
         alt="Loader Visual"
         auto="format"
       />
@@ -53,7 +53,7 @@ watch(currentIndex, (value) => {
   overflow: hidden;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100svh;
   width: 100%;
   z-index: 30;
   cursor: pointer;

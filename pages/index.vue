@@ -56,12 +56,25 @@ const animateIn = () => {
     },
   })
 }
+
+const test = computed(() => {
+  if (process.client) {
+    console.log('Did work. Is mobile?', window.innerWidth < 768)
+    return window.innerWidth < 768
+  } else {
+    console.log('Did not work')
+    return
+  }
+})
 </script>
 
 <template>
   <Title>Miroir | Brands</Title>
   <Transition name="fade" mode="in-out">
-    <Loader v-if="isLoading" :images="brands?.desktopLoaderImages" />
+    <Loader
+      v-if="isLoading"
+      :images="test ? brands.desktopLoaderImages : brands.mobileLoaderImages"
+    />
   </Transition>
   <main class="brands">
     <div class="wrapper">
@@ -126,6 +139,7 @@ const animateIn = () => {
         background-color: $white;
         opacity: 0;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        pointer-events: none;
 
         &--visible {
           opacity: 1;
@@ -174,6 +188,7 @@ const animateIn = () => {
       &__image {
         z-index: 10;
         aspect-ratio: 3 / 4.25;
+        pointer-events: none;
       }
 
       @include mq($from: tablet) {
