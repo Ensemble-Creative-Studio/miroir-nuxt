@@ -73,7 +73,7 @@ const test = computed(() => {
   <Transition name="fade" mode="in-out">
     <Loader
       v-if="isLoading"
-      :images="test ? brands.desktopLoaderImages : brands.mobileLoaderImages"
+      :images="test ? brands.desktopLoaderImages : brands.desktopLoaderImages"
     />
   </Transition>
   <main class="brands">
