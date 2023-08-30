@@ -1,5 +1,8 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
+import { useLoaderStore } from '@/stores/loader'
+
+const store = useLoaderStore()
 
 onMounted(() => {
   /* Animate in */
@@ -16,7 +19,7 @@ onMounted(() => {
 <template>
   <header class="Header">
     <div class="Header__logo">
-      <NuxtLink to="/" title="Brands">
+      <NuxtLink to="/" title="Brands" @click.native="store.showLoader()">
         <svg
           width="139"
           height="23"

@@ -43,7 +43,6 @@ watch(currentIndex, (value) => {
         auto="format"
       />
     </div>
-    <button class="skip-button" @click="store.endLoader()">Skip Intro</button>
   </div>
 </template>
 

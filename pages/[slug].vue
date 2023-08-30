@@ -121,9 +121,12 @@ onMounted(() => {
       }
     }
 
-    .en-description,
-    .contact {
+    .en-description {
       margin-top: 3rem;
+    }
+
+    .contact {
+      margin-top: 9rem;
 
       p:first-of-type {
         text-transform: uppercase;

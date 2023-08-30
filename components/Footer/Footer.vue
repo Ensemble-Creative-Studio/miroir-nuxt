@@ -31,7 +31,7 @@ onMounted(() => {
   margin-top: 15rem;
   padding-bottom: 1.5rem;
   text-transform: uppercase;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   opacity: 0;
 
   ul {

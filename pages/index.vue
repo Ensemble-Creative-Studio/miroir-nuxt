@@ -1,8 +1,20 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
-
+import { useBreakpoints } from '@vueuse/core'
 import { useLoaderStore } from '@/stores/loader'
 import { storeToRefs } from 'pinia'
+
+const breakpoints = useBreakpoints({
+  mobile: 480,
+  tablet: 768,
+})
+
+const isMobile = breakpoints.smallerOrEqual('tablet')
+console.log('isMobile', isMobile.value)
+
+watch(isMobile, (value) => {
+  console.log('isMobile', value)
+})
 
 const store = useLoaderStore()
 const { isLoading } = storeToRefs(store)
@@ -16,13 +28,10 @@ const query = groq`*[_type == "brandsPage"][0]
   }
 }
 `
-const { data, refresh } = useSanityQuery(query)
+const { data } = useSanityQuery(query)
 const brands = computed(() => {
   return data?.value
 })
-
-const $brand = ref([])
-const $image = ref([])
 
 onMounted(() => {
   setTimeout(() => {
@@ -56,16 +65,6 @@ const animateIn = () => {
     },
   })
 }
-
-const test = computed(() => {
-  if (process.client) {
-    console.log('Did work. Is mobile?', window.innerWidth < 768)
-    return window.innerWidth < 768
-  } else {
-    console.log('Did not work')
-    return
-  }
-})
 </script>
 
 <template>
@@ -73,7 +72,9 @@ const test = computed(() => {
   <Transition name="fade" mode="in-out">
     <Loader
       v-if="isLoading"
-      :images="test ? brands.desktopLoaderImages : brands.desktopLoaderImages"
+      :images="
+        isMobile ? brands.mobileLoaderImages : brands.desktopLoaderImages
+      "
     />
   </Transition>
   <main class="brands">
@@ -86,7 +87,6 @@ const test = computed(() => {
         }"
         :key="brand._id"
         class="brand"
-        ref="$brand"
         title="Brand"
       >
         <div class="brand__image">
@@ -97,13 +97,14 @@ const test = computed(() => {
           <SanityImage
             :asset-id="brand?.thumbnailImage?.asset?._ref"
             v-if="brand?.thumbnailImage"
-            ref="$image"
             alt="Brand Thumbnail"
             auto="format"
           >
           </SanityImage>
         </div>
-        <h2 class="brand__title">{{ brand?.title }}</h2>
+        <div class="brand__title">
+          <h2>{{ brand?.title }}</h2>
+        </div>
       </NuxtLink>
     </div>
   </main>
@@ -150,15 +151,28 @@ const test = computed(() => {
       &__title {
         position: absolute;
         left: 50%;
-        bottom: 4.5rem;
+        bottom: 6.5rem;
         transform: translate(-50%, -50%);
         text-transform: uppercase;
         font-size: 2.1rem;
-        font-weight: 600;
+        font-weight: 500;
         text-align: center;
         opacity: 0;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         text-overflow: clip;
+        border: 0.1rem solid red;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+          border: 0.1rem solid blue;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
 
         @include mq($until: wide) {
           font-size: 1.8rem;
