@@ -168,10 +168,12 @@ const animateIn = () => {
 
         h2 {
           // border: 0.1rem solid blue;
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
+          @include mq($from: tablet) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          }
         }
 
         @include mq($until: wide) {
