@@ -160,14 +160,14 @@ const animateIn = () => {
         opacity: 0;
         transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
         text-overflow: clip;
-        border: 0.1rem solid red;
+        // border: 0.1rem solid red;
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
 
         h2 {
-          border: 0.1rem solid blue;
+          // border: 0.1rem solid blue;
           position: absolute;
           left: 50%;
           top: 50%;
