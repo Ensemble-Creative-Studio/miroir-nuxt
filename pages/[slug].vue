@@ -8,12 +8,23 @@ const query = groq`*[_type == "brands" && slug.current == "${route.params.slug}"
 const { data: brand, refresh } = useSanityQuery(query)
 
 onMounted(() => {
-  /* Animate in */
   anime({
     targets: ['.visuals', '.text'],
     opacity: 1,
     duration: 1000,
     easing: 'easeInOutExpo',
+  })
+})
+
+onBeforeRouteLeave((to, from, next) => {
+  anime({
+    targets: ['.visuals', '.text'],
+    opacity: 0,
+    duration: 250,
+    easing: 'spring(1, 100, 50, 8)',
+    complete: () => {
+      next()
+    },
   })
 })
 </script>
@@ -37,7 +48,7 @@ onMounted(() => {
           auto="format"
         />
       </div>
-      <div class="visual" v-for="image in brand?.images">
+      <div class="visual" v-for="(image, i) in brand?.images" :key="i">
         <SanityImage
           :asset-id="image.asset._ref"
           alt="Brand Visual"

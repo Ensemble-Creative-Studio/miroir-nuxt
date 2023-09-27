@@ -1,9 +1,6 @@
 <script setup>
 import Lenis from '@studio-freight/lenis'
 
-import { useLoaderStore } from '@/stores/loader'
-const store = useLoaderStore()
-
 let lenis
 let raf
 
@@ -22,10 +19,6 @@ onMounted(() => {
 })
 
 const route = useRoute()
-
-if (route.fullPath !== '/') {
-  store.endLoader()
-}
 
 watch(
   () => route.fullPath,

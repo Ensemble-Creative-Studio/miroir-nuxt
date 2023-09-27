@@ -2,12 +2,23 @@
 import anime from 'animejs/lib/anime.es.js'
 
 onMounted(() => {
-  /* Animate in */
   anime({
     targets: '.agency-page .wrapper',
     opacity: [0, 1],
     duration: 1000,
     easing: 'easeInOutExpo',
+  })
+})
+
+onBeforeRouteLeave((to, from, next) => {
+  anime({
+    targets: '.agency-page .wrapper',
+    opacity: [1, 0],
+    duration: 250,
+    easing: 'spring(1, 100, 50, 8)',
+    complete: () => {
+      next()
+    },
   })
 })
 

@@ -2,12 +2,23 @@
 import anime from 'animejs/lib/anime.es.js'
 
 onMounted(() => {
-  /* Animate in */
   anime({
     targets: '.contact-page .wrapper',
     opacity: [0, 1],
     duration: 1000,
     easing: 'easeInOutExpo',
+  })
+})
+
+onBeforeRouteLeave((to, from, next) => {
+  anime({
+    targets: '.contact-page .wrapper',
+    opacity: [1, 0],
+    duration: 250,
+    easing: 'spring(1, 100, 50, 8)',
+    complete: () => {
+      next()
+    },
   })
 })
 
@@ -25,7 +36,7 @@ const contact = computed(() => {
   <main class="contact-page">
     <div class="wrapper">
       <div class="text">
-        <h1 class="title mr-big-title">{{ contact?.title }}</h1>
+        <h1 class="text__title mr-big-title">{{ contact?.title }}</h1>
         <div class="text__address">
           <p>{{ contact?.address.streetName }}</p>
           <p>{{ contact?.address.city }}</p>
@@ -70,6 +81,10 @@ const contact = computed(() => {
       @include mq($until: wide) {
         grid-column: 1 / span 12;
         order: 2;
+      }
+
+      &__title {
+        margin-left: -0.15rem;
       }
 
       &__address {

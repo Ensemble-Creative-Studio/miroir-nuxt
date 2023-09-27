@@ -1,31 +1,55 @@
 <script setup>
-import { useLoaderStore } from '@/stores/loader'
+import anime from 'animejs/lib/anime.es.js'
 
 const props = defineProps({
   images: Array,
 })
 
-const store = useLoaderStore()
-
 const currentIndex = ref(0)
-const SPEED = 750
+const SPEED = 2000
+
+let isPaused
+let timeout
 
 let interval = setInterval(() => {
-  currentIndex.value++
+  if (!isPaused) {
+    goForward()
+  }
 }, SPEED)
 
 const goForward = () => {
-  currentIndex.value++
+  currentIndex.value = (currentIndex.value + 1) % props?.images?.length
+  isPaused = true
+
+  timeout = setTimeout(() => {
+    isPaused = false
+  }, 1000)
 }
 
-watch(currentIndex, (value) => {
-  if (value === props?.images?.length) {
-    clearInterval(interval)
+onMounted(() => {
+  anime({
+    targets: '.Loader',
+    opacity: [0, 1],
+    duration: 1000,
+    easing: 'easeInOutExpo',
+  })
+})
 
-    setTimeout(() => {
-      store.endLoader()
-    }, SPEED)
-  }
+onBeforeUnmount(() => {
+  clearTimeout(timeout)
+  clearInterval(interval)
+})
+
+onBeforeRouteLeave((to, from, next) => {
+  anime({
+    targets: '.Loader',
+    opacity: [1, 0],
+    duration: 1000,
+    easing: 'easeInOutExpo',
+    complete: () => {
+      next()
+    },
+  })
 })
 </script>
 
@@ -54,7 +78,7 @@ watch(currentIndex, (value) => {
   left: 0;
   height: 100svh;
   width: 100%;
-  z-index: 30;
+  opacity: 0;
   cursor: pointer;
 
   .image {
@@ -63,7 +87,7 @@ watch(currentIndex, (value) => {
     position: fixed;
     top: 0;
     left: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
     &--hidden {
       opacity: 0;
@@ -74,23 +98,5 @@ watch(currentIndex, (value) => {
       object-position: center;
     }
   }
-
-  .skip-button {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease-in-out;
-}
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
 }
 </style>
