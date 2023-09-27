@@ -54,7 +54,6 @@ const animateOut = (next) => {
     targets: '.brand',
     opacity: {
       value: 0,
-      delay: anime.stagger(100, { start: 0 }),
       easing: 'spring(1, 100, 50, 8)',
     },
     translateY: {
@@ -63,7 +62,7 @@ const animateOut = (next) => {
     },
     complete: () => {
       next()
-    }
+    },
   })
 }
 
