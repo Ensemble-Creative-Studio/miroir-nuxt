@@ -28,10 +28,12 @@ const brands = computed(() => {
   return data?.value
 })
 
+let timeout = null
+
 onMounted(() => {
-  setTimeout(() => {
+  timeout = setTimeout(() => {
     animateIn()
-  }, 500)
+  }, 1000)
 })
 
 const animateIn = () => {
@@ -68,6 +70,7 @@ const animateOut = (next) => {
 
 onBeforeRouteLeave((to, from, next) => {
   animateOut(next)
+  clearTimeout(timeout)
 })
 </script>
 
