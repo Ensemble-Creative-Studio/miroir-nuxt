@@ -50,6 +50,7 @@ const { data: agency, refresh } = useSanityQuery(query)
       <div class="text">
         <h1 class="title mr-big-title">{{ agency?.title }}</h1>
         <p class="description">{{ agency?.description }}</p>
+        <p class="description--en">{{ agency?.descriptionEn }}</p>
       </div>
     </div>
   </main>
@@ -121,6 +122,12 @@ const { data: agency, refresh } = useSanityQuery(query)
 
         @include mq($until: tablet) {
           display: none;
+        }
+      }
+
+      .description {
+        &--en {
+            margin-top: 2rem;
         }
       }
     }
