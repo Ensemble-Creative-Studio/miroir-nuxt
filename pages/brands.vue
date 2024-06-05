@@ -1,18 +1,6 @@
 <script setup>
 import anime from 'animejs/lib/anime.es.js'
-import { useBreakpoints } from '@vueuse/core' 
-
-const breakpoints = useBreakpoints({
-  mobile: 480,
-  tablet: 768,
-})
-
-const isMobile = breakpoints.smallerOrEqual('tablet')
-console.log('isMobile', isMobile.value)
-
-watch(isMobile, (value) => {
-  console.log('isMobile', value)
-})
+import { wait } from '@/utils/async'
 
 /* Sanity data */
 const query = groq`*[_type == "brandsPage"][0]
@@ -28,25 +16,18 @@ const brands = computed(() => {
   return data?.value
 })
 
-let timeout = null
-
-onMounted(() => {
-  timeout = setTimeout(() => {
-    animateIn()
-  }, 1000)
-})
-
 const animateIn = () => {
   anime({
     targets: '.brand',
     opacity: {
-      value: 1,
+      value: [0, 1],
       delay: anime.stagger(100),
       easing: 'spring(1, 100, 50, 8)',
     },
     translateY: {
       value: [30, 0],
       easing: 'spring(1, 80, 20, 4)',
+      delay: anime.stagger(100),
     },
   })
 }
@@ -68,9 +49,13 @@ const animateOut = (next) => {
   })
 }
 
+onMounted(async () => {
+  await wait(1000)
+  animateIn()
+})
+
 onBeforeRouteLeave((to, from, next) => {
   animateOut(next)
-  clearTimeout(timeout)
 })
 </script>
 
@@ -87,6 +72,7 @@ onBeforeRouteLeave((to, from, next) => {
         :key="brand._id"
         class="brand"
         title="Brand"
+        ref="$brand"
       >
         <div class="brand__image">
           <div
@@ -123,9 +109,9 @@ onBeforeRouteLeave((to, from, next) => {
     }
 
     .brand {
-      opacity: 0;
       position: relative;
       overflow: hidden;
+      opacity: 0;
 
       @include mq($until: tablet) {
         overflow: visible;
