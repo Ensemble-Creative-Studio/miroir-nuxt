@@ -22,7 +22,6 @@ export default defineNuxtConfig({
   },
   components: [
     '~/components/Header',
-    '~/components/Loader',
     '~/components/Pagination',
     '~/components/Annex',
     '~/components/Footer',

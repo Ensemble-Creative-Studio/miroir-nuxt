@@ -8,83 +8,80 @@ const query = groq`*[_type == "brandsPage"][0] { ..., }`
 const { data } = useSanityQuery(query)
 const brands = computed(() => data.value)
 
-const isReady = ref(false)
-const currentIndex = ref(0)
 const SPEED = 2000
-
+let isPaused = false
 let interval = null
+let timeout = null
 
 const breakpoints = useBreakpoints({
   mobile: 480,
   tablet: 768,
 })
 
-const $loader = ref(null)
-
 const isMobile = breakpoints.smallerOrEqual('tablet')
+const isReady = ref(false)
+const currentIndex = ref(0)
 
-const onClick = async () => {
-  clearInterval(interval)
-  await wait(500)
-  startInterval(SPEED)
-}
-
-const goForward = async () => {
-  const images = isMobile.value ? brands.value.mobileLoaderImages : brands.value.desktopLoaderImages
-  currentIndex.value = (currentIndex.value + 1) % images.length
-}
-
-const startInterval = (speed) => {
-  if (interval) clearInterval(interval)  // Clear any existing interval before starting a new one
-  interval = setInterval(() => {
-    goForward()
-  }, speed)
-}
+const totalImages = computed(() => {
+  return isMobile.value
+    ? brands.value.mobileLoaderImages.length
+    : brands.value.desktopLoaderImages.length
+})
 
 onMounted(() => {
-  isReady.value = true
-  startInterval(SPEED)
-})
+  isReady.value = true;
+
+  interval = setInterval(() => {
+    if (isPaused) return
+    goNext()
+  }, SPEED)
+});
 
 onBeforeUnmount(() => {
   clearInterval(interval)
+  clearTimeout(timeout)
 })
 
 onBeforeRouteLeave((to, from, next) => {
   anime({
     targets: '.wrapper',
     opacity: [1, 0],
-    duration: 1500,
+    duration: 1000,
     complete: () => {
       next()
     },
   })
 })
+
+async function goNext() {
+  currentIndex.value = (currentIndex.value + 1) % totalImages.value
+  isPaused = true
+
+  timeout = setTimeout(() => {
+    isPaused = false
+  }, SPEED)
+}
 </script>
 
 <template>
   <Title>Miroir</Title>
-    <div class="Loader" @click="onClick" v-if="isReady">
+    <div class="index" @click="goNext" v-if="isReady">
     <div class="wrapper">
       <div
-      v-for="(n, index) in isMobile ? brands.mobileLoaderImages : brands.desktopLoaderImages"
-      class="image"
-      :class="{ 'image--hidden': index > currentIndex }"
-      ref="$image"
-      :key="index"
-    >
-      <SanityImage
-        :asset-id="n.asset._ref"
-        alt="Loader Visual"
-        auto="format"
-      />
-    </div>
+        class="image-wrapper"
+        :class="{ 'active' : index === currentIndex }"
+        v-for="(n, index) in isMobile ? brands.mobileLoaderImages : brands.desktopLoaderImages"
+        :style="{ zIndex: totalImages - 1 - index }"
+        :key="index"
+      >
+        <SanityImage :asset-id="n.asset._ref" />
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.Loader {
+.index {
   position: fixed;
   overflow: hidden;
   inset: 0;
@@ -96,21 +93,24 @@ onBeforeRouteLeave((to, from, next) => {
   animation: fade-in 0.5s 0.5s ease-in-out both;
   user-select: none;
 
-  .image {
+  .image-wrapper {
     height: 100%;
     width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.35s ease-out;
+    will-change: opacity;
 
-    &--hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
+    // &:nth-child(odd) {
+    //   background-color: red;
+    // }
 
-    img {
-      object-position: center;
+    // &:nth-child(even) {
+    //   background-color: blue;
+    // }
+
+    &.active {
+      opacity: 1;
     }
   }
 }
