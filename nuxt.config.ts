@@ -3,6 +3,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   modules: ['@nuxtjs/sanity', '@pinia/nuxt', '@vueuse/nuxt', "@nuxt/image"],
+  ssr: false,
   sanity: {
     projectId: 'psy845lh',
   },
