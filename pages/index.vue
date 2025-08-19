@@ -74,18 +74,17 @@ async function goNext() {
         :style="{ zIndex: totalImages - 1 - index }"
         :key="index"
       >
-          <NuxtImg
-            provider="static"
-            v-if="n?.asset?._ref"
-            :src="$urlFor(n)
-              .width(isMobile ? 900 : 1920)
-              .auto('format')
-              .quality(75)
-              .url()"
-            alt="Loader Image"
-            sizes="100vw"
-            loading="eager"
-          />
+        <img
+          v-if="n?.asset?._ref"
+          :src="$urlFor(n)
+            .width(isMobile ? 900 : 1920)
+            .auto('format')
+            .quality(75)
+            .url()"
+          alt="Loader Image"
+          :sizes="isMobile ? '100vw' : '100vw'"
+          loading="eager"
+        />
       </div>
     </div>
   </div>

@@ -35,8 +35,7 @@ onBeforeRouteLeave((to, from, next) => {
     <h1 class="title title--mobile mr-big-title">{{ brand?.title }}</h1>
     
     <div class="visual visual--mobile" v-if="brand?.thumbnailImage">
-      <NuxtImg
-        provider="static"
+      <!-- <NuxtImg
         :src="$urlFor(brand?.thumbnailImage)
                 .width(800)      // mobile
                 .auto('format')
@@ -45,12 +44,11 @@ onBeforeRouteLeave((to, from, next) => {
         alt="Brand Thumbnail"
         sizes="(max-width: 768px) 100vw, 800px"
         loading="lazy"
-      />
+      /> -->
     </div>
     <div class="visuals">
       <div class="visual visual--thumbnail" v-if="brand?.thumbnailImage">
-        <NuxtImg
-          provider="static"
+        <!-- <NuxtImg
           :src="$urlFor(brand?.thumbnailImage)
                   .width(1200)    // desktop thumbnail
                   .auto('format')
@@ -59,11 +57,10 @@ onBeforeRouteLeave((to, from, next) => {
           alt="Brand Thumbnail"
           sizes="(max-width: 768px) 100vw, 1200px"
           loading="lazy"
-        />
+        /> -->
       </div>
     <div class="visual" v-for="(image, i) in brand?.images" :key="i">
-      <NuxtImg
-        provider="static"
+      <!-- <NuxtImg
         :src="$urlFor(image)
                 .width(1200)    // gallery images
                 .auto('format')
@@ -72,7 +69,7 @@ onBeforeRouteLeave((to, from, next) => {
         alt="Brand Visual"
         sizes="(max-width: 768px) 100vw, 1200px"
         loading="lazy"
-      />
+      /> -->
     </div>
   </div>
     <div class="text">
