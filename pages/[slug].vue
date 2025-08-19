@@ -45,6 +45,17 @@ onBeforeRouteLeave((to, from, next) => {
         sizes="(max-width: 768px) 100vw, 800px"
         loading="lazy"
       /> -->
+      <img 
+        v-if="brand?.thumbnailImage.asset?._ref"
+        :src="$urlFor(brand?.thumbnailImage)
+          .width(800)
+          .auto('format')
+          .quality(75)
+          .url()"
+        alt="Brand Thumbnail"
+        sizes="(max-width: 768px) 100vw, 800px"
+        loading="lazy"
+      />
     </div>
     <div class="visuals">
       <div class="visual visual--thumbnail" v-if="brand?.thumbnailImage">
@@ -58,6 +69,17 @@ onBeforeRouteLeave((to, from, next) => {
           sizes="(max-width: 768px) 100vw, 1200px"
           loading="lazy"
         /> -->
+        <img 
+          v-if="brand?.thumbnailImage.asset?._ref"
+          :src="$urlFor(brand?.thumbnailImage)
+            .width(1200)
+            .auto('format')
+            .quality(80)
+            .url()"
+          alt="Brand Thumbnail"
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="lazy"
+        />
       </div>
     <div class="visual" v-for="(image, i) in brand?.images" :key="i">
       <!-- <NuxtImg
@@ -70,6 +92,17 @@ onBeforeRouteLeave((to, from, next) => {
         sizes="(max-width: 768px) 100vw, 1200px"
         loading="lazy"
       /> -->
+      <img 
+        v-if="image?.asset?._ref"
+        :src="$urlFor(image)
+          .width(1200)
+          .auto('format')
+          .quality(80)
+          .url()"
+        alt="Brand Visual"
+        sizes="(max-width: 768px) 100vw, 1200px"
+        loading="lazy"
+      />
     </div>
   </div>
     <div class="text">

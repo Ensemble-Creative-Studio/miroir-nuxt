@@ -63,6 +63,17 @@ const contact = computed(() => {
           sizes="(max-width: 768px) 100vw, 1200px"
           loading="lazy"
         /> -->
+        <img
+          v-if="contact?.image?.asset?._ref"
+          :src="$urlFor(contact?.image)
+            .width(1200)
+            .auto('format')
+            .quality(75)
+            .url()"
+          alt="Contact Image"
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="lazy"
+        />
       </div>
     </div>
   </main>

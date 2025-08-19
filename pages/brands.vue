@@ -87,6 +87,15 @@ onBeforeRouteLeave((to, from, next) => {
               .url()"
             alt="Brand Thumbnail"
           /> -->
+          <img 
+            v-if="brand?.thumbnailImage.asset?._ref"
+            :src="$urlFor(brand?.thumbnailImage)
+              .width(800)
+              .auto('format')
+              .quality(50)
+              .url()"
+            alt="Brand Thumbnail"
+          />
         </div>
         <div class="brand__title">
           <h2>{{ brand?.title }}</h2>

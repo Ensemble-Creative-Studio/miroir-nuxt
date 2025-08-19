@@ -45,6 +45,17 @@ const { data: agency, refresh } = useSanityQuery(query)
             sizes="(max-width: 768px) 100vw, 1200px"
             loading="lazy"
           /> -->
+          <img 
+            v-if="agency?.image?.asset?._ref"
+            :src="$urlFor(agency?.image)
+              .width(1200)
+              .auto('format')
+              .quality(75)
+              .url()"
+            alt="Agency Image"
+            sizes="(max-width: 768px) 100vw, 1200px"
+            loading="lazy"
+          />
         </div>
         <ul class="visual__credits">
           <li v-for="item in agency?.names" :key="item._key">
