@@ -7,6 +7,12 @@ export default defineNuxtConfig({
   sanity: {
     projectId: 'psy845lh',
   },
+  nitro: {
+    preset: 'static',
+    output: {
+      dir: 'dist'
+    }
+  },
   css: ['@/assets/scss/index.scss', '@/assets/fonts/ABCRepro/style.css'],
   vite: {
     css: {
