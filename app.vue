@@ -1,5 +1,5 @@
 <script setup>
-import Lenis from '@studio-freight/lenis'
+import Lenis from 'lenis'
 
 let lenis
 let raf
