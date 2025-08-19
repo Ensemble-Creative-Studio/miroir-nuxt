@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static',
     output: {
-      dir: 'dist'
+      dir: '.output'
     }
   },
   css: ['@/assets/scss/index.scss', '@/assets/fonts/ABCRepro/style.css'],
