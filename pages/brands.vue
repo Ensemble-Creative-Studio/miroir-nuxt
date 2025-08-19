@@ -79,13 +79,14 @@ onBeforeRouteLeave((to, from, next) => {
             class="brand__overlay"
             :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
           ></div>
-          <SanityImage
-            :asset-id="brand?.thumbnailImage?.asset?._ref"
-            v-if="brand?.thumbnailImage"
+          <NuxtImg
+            :src="$urlFor(brand?.thumbnailImage)
+              .width(800)
+              .auto('format')
+              .quality(50)
+              .url()"
             alt="Brand Thumbnail"
-            auto="format"
-          >
-          </SanityImage>
+          />
         </div>
         <div class="brand__title">
           <h2>{{ brand?.title }}</h2>

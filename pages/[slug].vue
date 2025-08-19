@@ -33,29 +33,45 @@ onBeforeRouteLeave((to, from, next) => {
   <Title>Miroir | {{ brand?.title }}</Title>
   <main class="brand-page">
     <h1 class="title title--mobile mr-big-title">{{ brand?.title }}</h1>
+    
     <div class="visual visual--mobile" v-if="brand?.thumbnailImage">
-      <SanityImage
-        :asset-id="brand?.thumbnailImage?.asset?._ref"
+      <NuxtImg
+        :src="$urlFor(brand?.thumbnailImage)
+                .width(800)      // mobile
+                .auto('format')
+                .quality(75)
+                .url()"
         alt="Brand Thumbnail"
-        auto="format"
+        sizes="(max-width: 768px) 100vw, 800px"
+        loading="lazy"
       />
     </div>
     <div class="visuals">
       <div class="visual visual--thumbnail" v-if="brand?.thumbnailImage">
-        <SanityImage
-          :asset-id="brand?.thumbnailImage?.asset?._ref"
+        <NuxtImg
+          :src="$urlFor(brand?.thumbnailImage)
+                  .width(1200)    // desktop thumbnail
+                  .auto('format')
+                  .quality(80)
+                  .url()"
           alt="Brand Thumbnail"
-          auto="format"
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="lazy"
         />
       </div>
-      <div class="visual" v-for="(image, i) in brand?.images" :key="i">
-        <SanityImage
-          :asset-id="image.asset._ref"
-          alt="Brand Visual"
-          auto="format"
-        />
-      </div>
+    <div class="visual" v-for="(image, i) in brand?.images" :key="i">
+      <NuxtImg
+        :src="$urlFor(image)
+                .width(1200)    // gallery images
+                .auto('format')
+                .quality(80)
+                .url()"
+        alt="Brand Visual"
+        sizes="(max-width: 768px) 100vw, 1200px"
+        loading="lazy"
+      />
     </div>
+  </div>
     <div class="text">
       <h1 class="title mr-big-title">{{ brand?.title }}</h1>
       <div class="fr-description">

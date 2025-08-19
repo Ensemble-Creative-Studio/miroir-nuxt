@@ -34,11 +34,16 @@ const { data: agency, refresh } = useSanityQuery(query)
       <h1 class="title title--mobile mr-big-title">{{ agency?.title }}</h1>
       <div class="visual">
         <div class="visual__image">
-          <SanityImage
+          <NuxtImg
             v-if="agency?.image?.asset?._ref"
-            :asset-id="agency?.image?.asset?._ref"
+            :src="$urlFor(agency?.image)
+                    .width(1200)     // largeur max desktop
+                    .auto('format')  // WebP/AVIF si dispo
+                    .quality(75)     // compression légère
+                    .url()"
             alt="Agency Image"
-            auto="format"
+            sizes="(max-width: 768px) 100vw, 1200px"
+            loading="lazy"
           />
         </div>
         <ul class="visual__credits">

@@ -52,11 +52,16 @@ const contact = computed(() => {
         </div>
       </div>
       <div class="visual">
-        <SanityImage
+        <NuxtImg
           v-if="contact?.image?.asset?._ref"
-          :asset-id="contact?.image?.asset?._ref"
+          :src="$urlFor(contact?.image)
+            .width(1200)
+            .auto('format')
+            .quality(75)
+            .url()"
           alt="Contact Image"
-          auto=format
+          sizes="(max-width: 768px) 100vw, 1200px"
+          loading="lazy"
         />
       </div>
     </div>
