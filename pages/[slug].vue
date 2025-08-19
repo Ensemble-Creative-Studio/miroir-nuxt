@@ -36,6 +36,7 @@ onBeforeRouteLeave((to, from, next) => {
     
     <div class="visual visual--mobile" v-if="brand?.thumbnailImage">
       <NuxtImg
+        provider="static"
         :src="$urlFor(brand?.thumbnailImage)
                 .width(800)      // mobile
                 .auto('format')
@@ -49,6 +50,7 @@ onBeforeRouteLeave((to, from, next) => {
     <div class="visuals">
       <div class="visual visual--thumbnail" v-if="brand?.thumbnailImage">
         <NuxtImg
+          provider="static"
           :src="$urlFor(brand?.thumbnailImage)
                   .width(1200)    // desktop thumbnail
                   .auto('format')
@@ -61,6 +63,7 @@ onBeforeRouteLeave((to, from, next) => {
       </div>
     <div class="visual" v-for="(image, i) in brand?.images" :key="i">
       <NuxtImg
+        provider="static"
         :src="$urlFor(image)
                 .width(1200)    // gallery images
                 .auto('format')

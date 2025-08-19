@@ -80,6 +80,7 @@ onBeforeRouteLeave((to, from, next) => {
             :class="{ 'brand__overlay--visible': !brand?.thumbnailImage }"
           ></div>
           <NuxtImg
+            provider="static"
             :src="$urlFor(brand?.thumbnailImage)
               .width(800)
               .auto('format')

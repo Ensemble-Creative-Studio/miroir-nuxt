@@ -53,6 +53,7 @@ const contact = computed(() => {
       </div>
       <div class="visual">
         <NuxtImg
+          provider="static"
           v-if="contact?.image?.asset?._ref"
           :src="$urlFor(contact?.image)
             .width(1200)

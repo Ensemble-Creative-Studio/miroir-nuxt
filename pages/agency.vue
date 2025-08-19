@@ -35,6 +35,7 @@ const { data: agency, refresh } = useSanityQuery(query)
       <div class="visual">
         <div class="visual__image">
           <NuxtImg
+            provider="static"
             v-if="agency?.image?.asset?._ref"
             :src="$urlFor(agency?.image)
                     .width(1200)     // largeur max desktop

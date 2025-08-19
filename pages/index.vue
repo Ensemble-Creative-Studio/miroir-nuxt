@@ -75,6 +75,7 @@ async function goNext() {
         :key="index"
       >
           <NuxtImg
+            provider="static"
             v-if="n?.asset?._ref"
             :src="$urlFor(n)
               .width(isMobile ? 900 : 1920)
