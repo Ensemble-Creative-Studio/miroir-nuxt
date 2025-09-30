@@ -19,9 +19,9 @@ export default defineNuxtConfig({
       preprocessorOptions: {
         scss: {
           additionalData: `
-            @import '@/assets/scss/tools/mq';\n
-            @import '@/assets/scss/tools/variables';\n
-            @import '@/assets/scss/tools/mixins';\n
+            @use '@/assets/scss/tools/mq' as *;
+            @use '@/assets/scss/tools/variables' as *;
+            @use '@/assets/scss/tools/mixins' as *;
           `,
         },
       },
@@ -33,4 +33,5 @@ export default defineNuxtConfig({
     '~/components/Annex',
     '~/components/Footer',
   ],
+  compatibilityDate: '2025-09-30',
 })

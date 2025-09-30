@@ -1,8 +1,8 @@
-@import 'tools/mq';
-@import 'tools/variables';
-@import 'tools/mixins';
+@use 'tools/mq' as *;
+@use 'tools/variables' as *;
+@use 'tools/mixins' as *;
 
-@import 'main/fonts';
-@import 'main/reset';
-@import 'main/base';
-@import 'main/utils';
+@use 'main/fonts';
+@use 'main/reset';
+@use 'main/base';
+@use 'main/utils';

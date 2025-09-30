@@ -57,11 +57,13 @@ const { data: agency, refresh } = useSanityQuery(query)
             loading="lazy"
           />
         </div>
-        <ul class="visual__credits">
-          <li v-for="item in agency?.names" :key="item._key">
-            {{ item }}
-          </li>
-        </ul>
+        <div class="visual__credits">
+          <ul v-for="line in agency?.names" :key="line._key">
+            <li v-for="name in line.row" :key="name">
+              {{ name }}
+            </li>
+          </ul>
+        </div>
       </div>
       <div class="text">
         <h1 class="title mr-big-title">{{ agency?.title }}</h1>
@@ -94,32 +96,24 @@ const { data: agency, refresh } = useSanityQuery(query)
       }
 
       img {
-        aspect-ratio: 7.1 / 5.8;
+        aspect-ratio: 6.1 / 5.3;
+        object-fit: contain;
+        object-position: left;
       }
 
-      ul {
-        display: flex;
-        flex-wrap: wrap;
+      .visual__credits {
         margin: 1.5rem 2.5rem;
-        max-width: 25rem;
         width: 100%;
         line-height: 1.2;
 
-        // @include mq($until: wide) {
-        //   max-width: 100%;
-        // }
+        ul {
+          display: flex;
+          flex-wrap: wrap;
 
-        // @include mq($until: tablet) {
-        //   max-width: 50%;
-        // }
-
-        @include mq($until: medium) {
-          max-width: 20rem;
-        }
-
-        li:not(:last-child) {
-          &::after {
-            content: '\00a0';
+          li:not(:last-child) {
+            &::after {
+              content: '\00a0';
+            }
           }
         }
       }

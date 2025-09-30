@@ -42,10 +42,20 @@ const contact = computed(() => {
           <p>{{ contact?.address.city }}</p>
         </div>
         <div class="text__details">
-          <a :href="`mailto:${contact?.details.email}`">{{
-            contact?.details.email
-          }}</a>
-          <p>{{ contact?.details.phone }}</p>
+          <div class="email-group">
+            <a :href="`mailto:${contact?.details.email}`">{{
+              contact?.details.email
+            }}</a>
+            <a
+              v-if="contact?.details.email2"
+              :href="`mailto:${contact?.details.email2}`"
+              >{{ contact?.details.email2 }}</a
+            >
+          </div>
+          <div class="phone-group">
+            <p>{{ contact?.details.phone }}</p>
+            <p v-if="contact?.details.phone2">{{ contact?.details.phone2 }}</p>
+          </div>
           <a :href="contact?.details.socialMedia.url" target="_blank">{{
             contact?.details.socialMedia.name
           }}</a>
@@ -109,6 +119,19 @@ const contact = computed(() => {
 
       &__details {
         margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .email-group,
+        .phone-group {
+          display: flex;
+          flex-direction: column;
+
+          *:not(:first-child) {
+            margin-top: -0.7rem;
+          }
+        }
       }
     }
 
