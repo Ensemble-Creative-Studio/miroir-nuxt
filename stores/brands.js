@@ -4,7 +4,7 @@ import { createClient } from '@sanity/client'
 export const client = createClient({
   projectId: 'psy845lh',
   dataset: 'production',
-  useCdn: true, // set to `false` to bypass the edge cache
+  useCdn: false, // set to `false` to bypass the edge cache
   apiVersion: '2023-08-05',
 })
 
