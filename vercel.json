@@ -24,7 +24,7 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self' https://miroir.sanity.studio http://localhost:3333"
+          "value": "frame-ancestors 'self' https://miroir.sanity.studio https://www.sanity.io http://localhost:3333"
         }
       ]
     }
