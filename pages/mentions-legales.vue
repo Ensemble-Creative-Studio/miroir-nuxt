@@ -1,7 +1,7 @@
 <script setup>
 /* Sanity data */
 const query = groq`*[_type == "legal"][0]`
-const { data: legal, refresh } = useSanityQuery(query)
+const { data: legal, refresh } = await useSanityQuery(query)
 </script>
 
 <template>

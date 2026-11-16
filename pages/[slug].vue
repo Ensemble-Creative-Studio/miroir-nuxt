@@ -4,8 +4,8 @@ import anime from 'animejs/lib/anime.es.js'
 const route = useRoute()
 
 /* Sanity data */
-const query = groq`*[_type == "brands" && slug.current == "${route.params.slug}"][0]`
-const { data: brand, refresh } = useSanityQuery(query)
+const query = groq`*[_type == "brands" && slug.current == $slug][0]`
+const { data: brand, refresh } = await useSanityQuery(query, { slug: route.params.slug })
 
 onMounted(() => {
   anime({

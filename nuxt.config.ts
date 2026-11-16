@@ -2,10 +2,14 @@
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/sanity', '@pinia/nuxt', '@vueuse/nuxt', "@nuxt/image"],
+  modules: ['@nuxtjs/sanity', '@pinia/nuxt', '@vueuse/nuxt'],
   ssr: true,
   sanity: {
     projectId: 'psy845lh',
+    dataset: 'production',
+    apiVersion: '2025-11-01',
+    useCdn: true,
+    perspective: 'published',
   },
   nitro: {
     preset: 'static',
@@ -33,5 +37,5 @@ export default defineNuxtConfig({
     '~/components/Annex',
     '~/components/Footer',
   ],
-  compatibilityDate: '2025-09-30',
+  compatibilityDate: '2025-11-01',
 })

@@ -11,7 +11,7 @@ const query = groq`*[_type == "brandsPage"][0]
   }
 }
 `
-const { data } = useSanityQuery(query)
+const { data } = await useSanityQuery(query)
 const brands = computed(() => {
   return data?.value
 })
