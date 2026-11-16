@@ -23,7 +23,7 @@ onMounted(() => {
     <div class="wrapper">
       <div class="content" v-if="data?.content">
         <h1 class="title mr-big-title">{{ data?.title }}</h1>
-        <SanityContent :blocks="data?.content" />
+        <SanityContent :value="data?.content" />
       </div>
     </div>
   </div>

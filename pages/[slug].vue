@@ -108,10 +108,10 @@ onBeforeRouteLeave((to, from, next) => {
     <div class="text">
       <h1 class="title mr-big-title">{{ brand?.title }}</h1>
       <div class="fr-description">
-        <SanityContent :blocks="brand?.frenchDescription" />
+        <SanityContent :value="brand?.frenchDescription" />
       </div>
       <div class="en-description">
-        <SanityContent :blocks="brand?.englishDescription" />
+        <SanityContent :value="brand?.englishDescription" />
       </div>
       <div class="contact">
         <p>{{ brand?.contact?.name }}</p>
