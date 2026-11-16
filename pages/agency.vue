@@ -24,7 +24,7 @@ onBeforeRouteLeave((to, from, next) => {
 
 /* Sanity data */
 const query = groq`*[_type == "agency"][0]`
-const { data: agency, refresh } = useSanityQuery(query)
+const { data: agency, refresh } = await useSanityQuery(query)
 </script>
 
 <template>

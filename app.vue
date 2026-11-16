@@ -35,7 +35,6 @@ useSeoMeta({
     'Miroir est une agence multi-marques à Paris, qui propose une sélection de marques françaises et internationales invitant au voyage. Attentif aux évolutions du marché, MIROIR découvre de nouveaux talents. Les marques avec lesquelles nous collaborons sont sélectionnées pour leur univers unique et leur capacité à répondre aux besoins du marché.',
   ogDescription:
     'Miroir est une agence multi-marques à Paris, qui propose une sélection de marques françaises et internationales invitant au voyage. Attentif aux évolutions du marché, MIROIR découvre de nouveaux talents. Les marques avec lesquelles nous collaborons sont sélectionnées pour leur univers unique et leur capacité à répondre aux besoins du marché.',
-  ogImage: 'https://example.com/image.png',
   twitterCard: 'summary_large_image',
 })
 </script>

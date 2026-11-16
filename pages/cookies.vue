@@ -1,7 +1,7 @@
 <script setup>
 /* Sanity data */
 const query = groq`*[_type == "cookies"][0]`
-const { data: cookies, refresh } = useSanityQuery(query)
+const { data: cookies, refresh } = await useSanityQuery(query)
 </script>
 
 <template>
